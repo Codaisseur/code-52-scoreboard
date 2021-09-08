@@ -14,6 +14,19 @@ export default function Scoreboard() {
 
   // maybe a useEffect
 
+  const addAPlayer = playerName => {
+    console.log("trying to add player", playerName);
+
+    // Obj: add a new player.
+    // on 1 hand: full players array
+    // on 2nd hand: a new player name.
+    const newPlayer = { name: playerName, score: 0, id: Math.random() * 1000 };
+
+    const updatedPlayers = [...players, newPlayer];
+
+    set_players(updatedPlayers);
+  };
+
   const incrementScore = playerId => {
     // Use an argument to let this function know which player was clicked.
     // Obj: Increase the score + 1 of A player (the one that was clicked)
@@ -57,7 +70,7 @@ export default function Scoreboard() {
           />
         ))}
       </ul>
-      <AddPlayerForm />
+      <AddPlayerForm addAPlayer={addAPlayer} />
     </div>
   );
 }
