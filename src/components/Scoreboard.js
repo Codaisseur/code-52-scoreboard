@@ -16,8 +16,7 @@ export default function Scoreboard() {
 
   const addAPlayer = playerName => {
     console.log("trying to add player", playerName);
-
-    // Obj: add a new player.
+    // Obj: add a new player.ss
     // on 1 hand: full players array
     // on 2nd hand: a new player name.
     const newPlayer = { name: playerName, score: 0, id: Math.random() * 1000 };
@@ -52,15 +51,25 @@ export default function Scoreboard() {
   // decide what css class to apply to an element depending on state
   // filtering
   // sort
-  const sortedPlayers = [...players].sort((player1, player2) => {
-    return player2.score - player1.score;
+  // const sortedPlayers = [...players].sort((player1, player2) => {
+  //   return player2.score - player1.score; // positive, 0, negative
+  // });
+
+  const sortedByName = [...players].sort((player1, player2) => {
+    return player1.name.localeCompare(player2.name);
   });
+
+  // Split the players into those with score > 13, and those with less.
+  // {
+  //   over13: [],
+  //   under13: []
+  // }
 
   return (
     <div className='Scoreboard'>
       <p>Player's scores:</p>
       <ul>
-        {sortedPlayers.map((player, i) => (
+        {sortedByName.map((player, i) => (
           <Player
             key={i}
             id={player.id}

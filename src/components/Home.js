@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   // We create a state were we will later store our fetched data
@@ -11,8 +12,9 @@ const Home = () => {
       const response = await axios.get(
         "https://app.pokemon-api.xyz/pokemon/all"
       );
-      console.log("reponse from request", response);
-      setPoke(response.data.slice(0, 10));
+      const only10 = response.data.slice(0, 10);
+      console.log(only10);
+      setPoke(only10);
     } catch (e) {
       console.log(e.message);
     }
@@ -39,6 +41,7 @@ const Home = () => {
             <div style={{ border: "1px white solid" }}>
               <img src={poke.thumbnail} alt={"poke"} />
               <h3>{poke.name.english}</h3>
+              <Link to={`/details/${poke.id}`}>Details</Link>
             </div>
           ))}
         </div>
